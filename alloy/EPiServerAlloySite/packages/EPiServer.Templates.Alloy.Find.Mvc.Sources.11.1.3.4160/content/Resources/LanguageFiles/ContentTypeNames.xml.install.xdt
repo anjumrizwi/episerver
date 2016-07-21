@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languages xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <language name="English" id="en">
+    <contenttypes>
+      <findsearchpage xdt:Transform="Insert">
+        <name>Find Search Page</name>
+        <description>Used to provide EPiServer Find search features</description>
+      </findsearchpage>
+    </contenttypes>
+  </language>
+</languages>

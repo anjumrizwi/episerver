@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languages xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <language name="English" id="en">
+    <contenttypes>
+      <findsearchpage xdt:Transform="Insert">
+        <properties>
+          <excerptlength>
+            <caption>Excerpt Length</caption>
+          </excerptlength>
+          <hitimagesheight>
+            <caption>Hit Images Height</caption>
+          </hitimagesheight>
+          <highlightexcerpts>
+            <caption>Highlight Excerpts</caption>
+          </highlightexcerpts>
+          <highlighttitles>
+            <caption>Highlight Titles</caption>
+          </highlighttitles>
+          <pagesize>
+            <caption>Page Size</caption>
+          </pagesize>
+          <useandformultiplesearchterms>
+            <caption>Use "AND" for multiple search terms</caption>
+          </useandformultiplesearchterms>
+          <relatedcontentarea>
+            <caption>Related Content Area</caption>
+          </relatedcontentarea>
+        </properties>
+      </findsearchpage>
+    </contenttypes>
+  </language>
+</languages>
