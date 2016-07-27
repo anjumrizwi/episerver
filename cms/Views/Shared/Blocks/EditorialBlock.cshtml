@@ -1,0 +1,8 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServerSimpleSite.Views.Blocks.EditorialBlock
+
+<div class="clearfix" @Html.EditAttributes(x => x.MainBody)>
+    @Html.DisplayFor(m => m.MainBody)
+</div>

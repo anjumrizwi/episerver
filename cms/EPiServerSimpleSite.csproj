@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -190,6 +195,10 @@
       <HintPath>packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
       <Private>True</Private>
@@ -218,6 +227,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -227,20 +240,44 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
+    <Compile Include="Business\IModifyLayout.cs" />
+    <Compile Include="Business\ContentExtensions.cs" />
+    <Compile Include="Business\PageContextActionFilter.cs" />
+    <Compile Include="Business\PageViewContextFactory.cs" />
+    <Compile Include="Business\Rendering\Interface.cs" />
+    <Compile Include="Controllers\DefaultPageController.cs" />
+    <Compile Include="Controllers\PageControllerBase.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
+    <Compile Include="Controllers\StandardPageController.cs" />
+    <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\Blocks\TeaserBlock.cs" />
+    <Compile Include="Models\Blocks\EditorialBlock.cs" />
+    <Compile Include="Models\Blocks\SiteBlockData.cs" />
+    <Compile Include="Models\Blocks\SiteLogoBlock.cs" />
+    <Compile Include="Models\Pages\ContainerPage.cs" />
+    <Compile Include="Models\SiteContentType.cs" />
+    <Compile Include="Models\Media\GenericMedia.cs" />
+    <Compile Include="Models\Media\ImageFile.cs" />
+    <Compile Include="Models\Media\VideoFile.cs" />
+    <Compile Include="Models\Pages\SitePageData.cs" />
+    <Compile Include="Models\Pages\StandardPage.cs" />
+    <Compile Include="Models\Pages\StartPage.cs" />
+    <Compile Include="Models\Properties\PropertyStringList.cs" />
+    <Compile Include="Models\Properties\PropertyStringListControl.cs" />
+    <Compile Include="Models\SiteImageUrl.cs" />
+    <Compile Include="Models\ViewModels\PreviewModel.cs" />
+    <Compile Include="Models\ViewModels\PageViewModel.cs" />
+    <Compile Include="Models\ViewModels\LayoutModel.cs" />
+    <Compile Include="Models\ViewModels\IPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\Blocks\" />
-    <Folder Include="Models\Media\" />
-    <Folder Include="Models\Pages\" />
-    <Folder Include="Models\Properties\" />
     <Folder Include="Static\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -255,6 +292,16 @@
     <Content Include="modules\_protected\CMS\CMS.zip" />
     <Content Include="modules\_protected\EPiServer.Packaging.UI\web.config" />
     <Content Include="modules\_protected\EPiServer.Packaging.UI\EPiServer.Packaging.UI.zip" />
+    <Content Include="Views\StartPage\Index.cshtml" />
+    <Content Include="Views\StandardPage\Index.cshtml" />
+    <Content Include="Views\Shared\Layouts\_LeftNavigation.cshtml" />
+    <Content Include="Views\Shared\Layouts\_Root.cshtml" />
+    <Content Include="Views\Shared\Breadcrumbs.cshtml" />
+    <Content Include="Views\Shared\SubNavigation.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Blocks\EditorialBlock.cshtml" />
+    <Content Include="Views\Shared\Blocks\TeaserBlock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
