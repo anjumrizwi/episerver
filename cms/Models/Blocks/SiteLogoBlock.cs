@@ -1,20 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using EPiServer;
 using EPiServer.Core;
-using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
 using EPiServer.Shell.ObjectEditing;
-using EPiServer;
 using EPiServer.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace EPiServerSimpleSite.Models.Blocks
 {
     /// <summary>
     /// Used to provide a composite property on the start page to set site logotype settings
     /// </summary>
-    [ContentType(DisplayName = "SiteLogoBlock", GUID = "aca32225-b39f-4211-b412-927dc2b58dc4",
-         AvailableInEditMode = false, // Should not be created and added to content areas by editors, the SiteLogotypeBlock is only used as a property type
-         Description = "")]
+    [SiteContentType(GUID = "aca32225-b39f-4211-b412-927dc2b58dc4",
+         AvailableInEditMode = false)] // Should not be created and added to content areas by editors, the SiteLogotypeBlock is only used as a property type
     public class SiteLogoBlock : SiteBlockData
     {
         /// <summary>

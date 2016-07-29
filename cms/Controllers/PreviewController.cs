@@ -82,8 +82,8 @@ namespace EPiServerSimpleSite.Controllers
 
         public void ModifyLayout(LayoutModel layoutModel)
         {
-            //layoutModel.HideHeader = true;
-            //layoutModel.HideFooter = true;
+            layoutModel.HideHeader = true;
+            layoutModel.HideFooter = true;
         }
     }
 }

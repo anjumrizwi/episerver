@@ -9,12 +9,15 @@ namespace EPiServerSimpleSite
 {
     public class Global
     {
-         /// <summary>
+        /// <summary>
         /// Group names for content types and properties
         /// </summary>
         [GroupDefinitions()]
         public static class GroupNames
         {
+            [Display(Name = "Contact", Order = 1)]
+            public const string Contact = "Contact";
+
             [Display(Name = "Default", Order = 2)]
             public const string Default = "Default";
 

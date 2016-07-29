@@ -37,6 +37,9 @@ namespace EPiServerSimpleSite.Models.Pages
         public virtual LinkItemCollection CustomerZonePageLinks { get; set; }
 
         [Display(GroupName = Global.GroupNames.SiteSettings)]
+        public virtual PageReference ContactsPageLink { get; set; }
+
+        [Display(GroupName = Global.GroupNames.SiteSettings)]
         public virtual PageReference SearchPageLink { get; set; }
 
         [Display(GroupName = Global.GroupNames.SiteSettings)]
