@@ -2,7 +2,7 @@
 using EPiServer.DataAbstraction;
 using EPiServer.Security;
 using EPiServer.Web.Mvc;
-using EPiServer.XForms;
+//using EPiServer.Forms;
 using EPiServerSimpleSite.Models.ViewModels;
 
 using System;
@@ -94,14 +94,14 @@ namespace EPiServerSimpleSite.Business.Rendering
                 }
                 HandlerError(helper, contentData, ex);
             }
-            catch (XFormException ex)
-            {
-                if (HttpContext.Current.IsDebuggingEnabled)
-                {
-                    throw;
-                }
-                HandlerError(helper, contentData, ex);
-            }
+            //catch (XFormException ex)
+            //{
+            //    if (HttpContext.Current.IsDebuggingEnabled)
+            //    {
+            //        throw;
+            //    }
+            //    HandlerError(helper, contentData, ex);
+            //}
         }
 
         private void HandlerError(HtmlHelper helper, IContentData contentData, Exception renderingException)
