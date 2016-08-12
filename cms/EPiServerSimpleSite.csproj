@@ -278,11 +278,13 @@
     <Compile Include="Business\Rendering\SiteViewEngine.cs" />
     <Compile Include="Business\Rendering\TemplateCoordinator.cs" />
     <Compile Include="Business\StructureMapDependencyResolver.cs" />
+    <Compile Include="Controllers\BaseFomBlockController.cs" />
     <Compile Include="Controllers\DefaultPageController.cs" />
     <Compile Include="Controllers\LoginPageController.cs" />
     <Compile Include="Controllers\PageControllerBase.cs" />
     <Compile Include="Controllers\PageListBlockController.cs" />
     <Compile Include="Controllers\PreviewController.cs" />
+    <Compile Include="Controllers\RegisterBlockController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,14 +292,18 @@
     <Compile Include="Global.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\UrlHelpers.cs" />
+    <Compile Include="Models\Forms\BaseFormModel.cs" />
     <Compile Include="Models\Blocks\PageListBlock.cs" />
+    <Compile Include="Models\Blocks\RegisterBlock.cs" />
     <Compile Include="Models\Blocks\TeaserBlock.cs" />
     <Compile Include="Models\Blocks\EditorialBlock.cs" />
     <Compile Include="Models\Blocks\SiteBlockData.cs" />
     <Compile Include="Models\Blocks\SiteLogoBlock.cs" />
+    <Compile Include="Models\Entities\UserDetail.cs" />
     <Compile Include="Models\Pages\ContactPage.cs" />
     <Compile Include="Models\Pages\ContainerPage.cs" />
     <Compile Include="Models\Pages\LoginPage.cs" />
+    <Compile Include="Models\Forms\RegisterBlockModel.cs" />
     <Compile Include="Models\SiteContentType.cs" />
     <Compile Include="Models\Media\GenericMedia.cs" />
     <Compile Include="Models\Media\ImageFile.cs" />
@@ -366,6 +372,8 @@
     <Content Include="modules\_protected\EPiServer.Packaging.UI\web.config" />
     <Content Include="modules\_protected\EPiServer.Packaging.UI\EPiServer.Packaging.UI.zip" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\RegisterBlock\Index.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
