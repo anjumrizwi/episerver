@@ -1,0 +1,30 @@
+﻿@using EPiServer.Web.Mvc.Html
+@using EPiServerSimpleSite.Models.Forms
+
+@model RegisterBlockModel
+
+<div>
+    <h2>@Html.PropertyFor(m => m.ParentBlock.HeadingLineText)</h2>
+    <p>@Html.ValidationSummary()</p>
+    @using (Html.BeginForm("Submit", null))
+    {
+        @Html.HiddenFor(m => m.CurrentBlockLink)
+        @Html.HiddenFor(m => m.CurrentPageLink)
+        @Html.HiddenFor(m => m.CurrentLanguage)
+        <div>
+            <p>
+                @Html.PropertyFor(x => x.ParentBlock.UserNameText)
+                <input type="text" name="UserName" value="@Model.UserName">
+            </p>
+            <p>
+                @Html.PropertyFor(x => x.ParentBlock.PasswordText)
+                <input type="password" name="Password" value="@Model.Password">
+            </p>
+            <p>
+                @Html.PropertyFor(x => x.ParentBlock.EmailIdText)
+                <input type="text" name="EmailId" value="@Model.EmailId">
+            </p>
+            <button type="submit">Submit</button>
+        </div>
+    }
+</div>
