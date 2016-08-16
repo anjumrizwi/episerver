@@ -1,0 +1,58 @@
+﻿@using System.Linq
+@using EPiServerDemoSite.Helpers
+@using EPiServerDemoSite.Models.Media
+
+@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.Pages.CarousalPage>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Static/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="~/Static/css/MasterStyle.css" rel="stylesheet" />
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<div class="bread_crumb">
+    <ul>@Html.CreateBreadcrumbsMenu(@Model.CurrentPage.ContentLink)</ul>
+    <hr>
+</div>
+    <div class="container">
+
+        <br>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            @{
+                if (Model.CurrentPage.FeaturedContentArea != null)
+                {
+                    var items = Model.CurrentPage.FeaturedContentArea.FilteredItems.GetContentItems<ImageFile>().ToList();
+
+                <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+
+                        @for (int i = 0; i < items.Count(); i++)
+                        {
+                            <div class="item @(i == 0 ? "active" : string.Empty)">
+                                <div class="carousal_img">@Html.PropertyFor(m => items[i].ContentRef)</div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+

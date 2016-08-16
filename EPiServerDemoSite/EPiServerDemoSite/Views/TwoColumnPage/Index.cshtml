@@ -1,0 +1,21 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web
+@using EPiServer.Web.Mvc.Html
+@using EPiServerDemoSite.Helpers
+
+@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.Pages.TwoColumnPage>
+
+@{
+    Layout = "~/Views/Shared/_TwoColumnPage.cshtml";    
+}
+
+<div class="bread_crumb">
+    <ul>@Html.CreateBreadcrumbsMenu(@Model.CurrentPage.ContentLink)</ul>
+    <hr>
+</div>
+
+<div>
+    <ul>@Html.CreateChildMenu(@Model.CurrentPage.ContentLink)</ul>
+    <hr>
+</div>
+<div id="main" class="row" @Html.EditAttributes(x => x.CurrentPage.MainBody)>@Html.DisplayFor(m => m.CurrentPage.MainBody)  </div>

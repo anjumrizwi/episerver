@@ -1,0 +1,37 @@
+﻿@using EPiServer.Core
+@using EPiServerDemoSite.Helpers
+
+@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.EPiPageData>
+<div>
+    <nav>
+        <div class="top-bar float-left">
+            <div class="top-container">
+                <div class="float-left">
+                    <div class="dt-sc-contact-info">
+                        <p>
+                            <i class="fa fa-phone"></i>Any Questions? Call Us: 1-223-355-2214
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="langauge_inner language_changer float-left">
+                <select id="ddlLanguage">
+                    <option value="en">English</option>
+                    <option value="sv">Svenska</option>
+                </select>
+            </div>
+        </div>
+        <div class="nav_inner float-left">
+            <div class="logo_img">@Html.PropertyFor(m => m.Layout.Logo)</div>
+
+            <div class="menu_list">
+
+                <ul>
+                    @Html.CreateMenu()
+                </ul>
+            </div>
+            
+        </div>       
+    </nav>
+</div>
+

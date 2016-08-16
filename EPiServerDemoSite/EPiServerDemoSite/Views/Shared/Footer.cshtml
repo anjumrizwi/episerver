@@ -1,0 +1,7 @@
+﻿@using EPiServer.Core
+@using EPiServerDemoSite.Models.ViewModels
+@using EPiServerDemoSite.Models
+
+@model IPageViewModel<EPiPageData>
+
+<div id="footer" @Html.EditAttributes(x => x.Layout.Footer)>@Html.DisplayFor(m => m.Layout.Footer)  </div>   

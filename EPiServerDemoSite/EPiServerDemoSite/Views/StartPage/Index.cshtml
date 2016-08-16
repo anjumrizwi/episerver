@@ -1,0 +1,7 @@
+﻿@using EPiServer.ServiceLocation
+@using EPiServer.Web.Routing
+@model EPiServerDemoSite.Models.ViewModels.PageViewModel<EPiServerDemoSite.Models.Pages.HomePage>
+
+<div>   
+@Html.PropertyFor(x => x.CurrentPage.MainBody)
+</div>

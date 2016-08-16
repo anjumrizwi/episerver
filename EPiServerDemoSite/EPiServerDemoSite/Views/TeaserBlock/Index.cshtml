@@ -1,0 +1,19 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServerDemoSite.Helpers
+
+@model EPiServerDemoSite.Models.Blocks.TeaserBlock
+
+
+<link href="~/Static/css/MasterStyle.css" rel="stylesheet" />
+
+    <div class="border">
+        <h2 @Html.EditAttributes(x => x.TeaserHeading)>@Model.TeaserHeading</h2>
+        @using (Html.BeginConditionalLink(
+            !ContentReference.IsNullOrEmpty(Model.Link), Url.PageLinkUrl(Model.Link), Model.TeaserHeading))
+        {
+            <p @Html.EditAttributes(x => x.TeaserText)>@Model.TeaserText</p>
+            <div @Html.EditAttributes(x => x.TeaserImage)><img src="@Url.ContentUrl(Model.TeaserImage)" /></div>
+        }
+
+    </div>

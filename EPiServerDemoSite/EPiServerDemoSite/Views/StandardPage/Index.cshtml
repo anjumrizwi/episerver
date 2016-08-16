@@ -1,0 +1,19 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.XForms.WebControls
+@using EPiServerDemoSite.Helpers
+
+@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.EPiPageData>
+
+<link href="~/Static/css/bootstrap.css" rel="stylesheet" />
+
+<div class="bread_crumb">
+    <ul>@Html.CreateBreadcrumbsMenu(@Model.CurrentPage.ContentLink)</ul>
+    <hr>
+</div>
+<div>
+    <ul>@Html.CreateChildMenu(@Model.CurrentPage.ContentLink)</ul>
+    <hr>
+</div>
+<div @Html.EditAttributes(x => x.CurrentPage.MainBody)>@Html.DisplayFor(m => m.CurrentPage.MainBody)  </div>
