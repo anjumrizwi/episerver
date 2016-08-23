@@ -1,4 +1,7 @@
-﻿using EPiServer.DataAnnotations;
+﻿using EPiServer.Core;
+using EPiServer.DataAbstraction;
+using EPiServer.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace EPiServerDemoSite.Models.Pages
 {
@@ -6,6 +9,9 @@ namespace EPiServerDemoSite.Models.Pages
     [SiteImageUrl("~/Static/gfx/fallows-media-wide.jpg")]
     public class StandardPage : EPiPageData
     {
-
+        [Display(GroupName = SystemTabNames.Content, Order = 310)]
+        [CultureSpecific]
+        [AllowedTypes(new[] { typeof(IContentData) })]
+        public virtual ContentArea MainContentArea { get; set; }
     }
 }

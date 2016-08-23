@@ -4,7 +4,7 @@
 @using EPiServer.XForms.WebControls
 @using EPiServerDemoSite.Helpers
 
-@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.EPiPageData>
+@model EPiServerDemoSite.Models.ViewModels.IPageViewModel<EPiServerDemoSite.Models.Pages.StandardPage>
 
 <link href="~/Static/css/bootstrap.css" rel="stylesheet" />
 
@@ -17,3 +17,4 @@
     <hr>
 </div>
 <div @Html.EditAttributes(x => x.CurrentPage.MainBody)>@Html.DisplayFor(m => m.CurrentPage.MainBody)  </div>
+@Html.PropertyFor(x => x.CurrentPage.MainContentArea, new { CssClass = "row", Tag = Global.ContentAreaTags.FullWidth })

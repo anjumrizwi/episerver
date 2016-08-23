@@ -1,11 +1,13 @@
 ﻿//using ValtechEpi.Business;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EPiServer;
 using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using System.Collections.Generic;
 
 
 namespace EPiServerDemoSite.Helpers
@@ -135,6 +137,42 @@ namespace EPiServerDemoSite.Helpers
                     return new MvcHtmlString(page.LinkURL);
             }
             return MvcHtmlString.Empty;
+        }
+
+        public static string ActivePage(this HtmlHelper helper, string controller, string action)
+        {
+            string classValue = "";
+
+            var overrideList = new List<PageCheck>
+            {
+                new PageCheck("Index", "ChangePassword"),
+                new PageCheck("Index", "ManageUserRoles")
+            };
+
+            string currentController =
+                helper.ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString();
+            string currentAction = helper.ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString();
+
+            if (overrideList.Any(x => x.OrginalPage == action && x.MappedPage == currentAction))
+                currentAction = action;
+
+            classValue = currentController.ToLower() == controller.ToLower() && currentAction.ToLower() == action.ToLower()
+                ? "epi-tabView-navigation-item-selected"
+                : "epi-tabView-navigation-item";
+
+            return classValue;
+        }
+    }
+
+    internal class PageCheck
+    {
+        public string OrginalPage { get; set; }
+        public string MappedPage { get; set; }
+
+        public PageCheck(string op, string mp)
+        {
+            OrginalPage = op;
+            MappedPage = mp;
         }
     }
 }

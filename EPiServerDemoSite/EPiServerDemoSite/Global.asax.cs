@@ -15,7 +15,8 @@ namespace EPiServerDemoSite
         protected override void RegisterRoutes(System.Web.Routing.RouteCollection routes)
         {
             base.RegisterRoutes(routes);
-            routes.MapRoute("default", "{controller}/{action}", new { controller = "ContactUsBlockController", action = "SendMail" });
+            //routes.MapRoute("default", "{controller}/{action}", new { controller = "ContactUsBlockController", action = "SendMail" });
+            routes.MapRoute("default", "{controller}/{action}", new { action = "index" });
         }
     }
 }

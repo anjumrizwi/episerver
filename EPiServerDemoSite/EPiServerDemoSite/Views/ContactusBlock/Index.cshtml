@@ -6,25 +6,16 @@
 <script src="~/Static/js/jquery-1.10.2.min.js"></script>
 <script src="~/Static/js/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Static/js/jquery.validate.unobtrusive.js"></script>
+
 <script>
     $(document).ready(function () {
-        $("#txtName").prop('required', true);
-        $("#txtEmail").prop('required', true);
-        $("#txtPhone").prop('required', true);
+        $("#txtName,#txtEmail,#txtPhone").prop('required', true);       
     });
-
-
 </script>
 
-
-
 <div style="width: 60%; border: 5px solid green; padding: 25px; margin: 25px;">
-
-
-
     <div style="width: 100%;height:50%;">
         <div style="padding:20px;">@Html.DisplayFor(x => x.Caption)</div>
-
 
         @using (Ajax.BeginForm("SendMail", "ContactUsBlock",
                             new AjaxOptions { UpdateTargetId = "divmsg" }))
@@ -34,8 +25,7 @@
             <table border="0" width="100%" style="padding:20px;">
                 <tr>
                     <td>@Html.Label("Name")</td>
-                    <td>@Html.TextBox("txtName")</td>
-                    
+                    <td>@Html.TextBox("txtName")</td>                    
                 </tr>
                 <tr>
                     <td>
@@ -57,12 +47,6 @@
                     <td colspan="2" align="center"> <button>Send</button></td>
                 </tr>
             </table>
-
         }
-    </div>
-
-
-
-
-
+    </div>    
 </div>

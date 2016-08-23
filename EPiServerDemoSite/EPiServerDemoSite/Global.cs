@@ -32,5 +32,17 @@ namespace EPiServerDemoSite
             [Display(Name = "Specialized", Order = 7)]
             public const string Specialized = "Specialized";
         }
+
+        /// <summary>
+        /// Tags to use for the main widths used in the Bootstrap HTML framework
+        /// </summary>
+        public static class ContentAreaTags
+        {
+            public const string FullWidth = "span12";
+            public const string TwoThirdsWidth = "span8";
+            public const string HalfWidth = "span6";
+            public const string OneThirdWidth = "span4";
+            public const string NoRenderer = "norenderer";
+        }
     }
 }

@@ -16,8 +16,8 @@ namespace EPiServerDemoSite.Helpers
 {
     public static class MyHtmlHelper
     {
-        public static MvcHtmlString CreateMenu(this HtmlHelper helper) {
-
+        public static MvcHtmlString CreateMenu(this HtmlHelper helper)
+        {
             var contentLoader = ServiceLocator.Current.GetInstance<IContentLoader>();
             var pages = contentLoader.GetChildren<EPiPageData>(ContentReference.StartPage);
 
@@ -53,7 +53,6 @@ namespace EPiServerDemoSite.Helpers
 
             return new MvcHtmlString(buffer.ToString());
         }
-        
 
         public static MvcHtmlString CreateBreadcrumbsMenu(this HtmlHelper helper, ContentReference currentContentLink)
         {
@@ -64,7 +63,7 @@ namespace EPiServerDemoSite.Helpers
                .SkipWhile(x => x.ID < ContentReference.StartPage.ID)
                .ToList();
             pages.Add(currentContentLink);
-           
+
 
             var template = GetMenuItemTemplate(helper);
             var buffer = new StringBuilder();
@@ -88,9 +87,7 @@ namespace EPiServerDemoSite.Helpers
             return x => new HelperResult(writer => writer.Write(string.Format("<li> {0} &gt;</li>", helper.PageLink(x.ToPageReference()).ToHtmlString())));
         }
 
-        public static IEnumerable<T> GetContentItems<T>(this IEnumerable<ContentAreaItem> contentAreaItems, LanguageLoaderOption languageLoaderOption = null,
-    IContentLoader contentLoader = null)
-    where T : IContent
+        public static IEnumerable<T> GetContentItems<T>(this IEnumerable<ContentAreaItem> contentAreaItems, LanguageLoaderOption languageLoaderOption = null, IContentLoader contentLoader = null) where T : IContent
         {
             if (contentAreaItems == null)
             {
