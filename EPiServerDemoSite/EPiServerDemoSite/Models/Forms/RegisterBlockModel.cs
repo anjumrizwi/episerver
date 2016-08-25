@@ -6,8 +6,8 @@ namespace EPiServerDemoSite.Models.Forms
 {
     public class RegisterBlockModel : BaseFormModel<RegisterBlock>
     {
-        [DisplayName("Username")]
         [Required]
+        [DisplayName("Username")]
         public string UserName { get; set; }
 
         [Required]

@@ -92,6 +92,11 @@ namespace EPiServerDemoSite.Controllers
             SaveModelState(formModel.CurrentBlockLink);
 
             return await Register(formModel);
+
+            #region RedirectResult
+            //http://www.madsstorm.dk/2014/03/posting-from-episerver-mvc-block.html
+            //return new RedirectResult(_urlResolver.GetUrl(viewModel.CurrentPageLink, viewModel.CurrentLanguage));  
+            #endregion
         }
 
         public ActionResult Success()
@@ -112,18 +117,14 @@ namespace EPiServerDemoSite.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    ViewBag.StatusMessage = "User Created!";
-                    //return Redirect("/");
+                    ViewBag.StatusMessage = "<h3>User Created!</h3>";
                 }
 
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            //return Json("Hello");
             return PartialView("Index", model);
-
-            //return Content(ViewBag.StatusMessage);
         }
 
         private void AddErrors(IdentityResult result)

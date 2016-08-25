@@ -7,10 +7,11 @@ using EPiServer;
 using EPiServer.Core;
 using EPiServer.Web;
 using EPiServer.Web.Mvc;
+using EPiServerDemoSite.Models.Blocks;
 
 namespace EPiServerDemoSite.Controllers
 {
-    public class BaseFomBlockController<T> : BlockController<T> where T : BlockData
+    public class BaseFomBlockController<T> : BlockController<T> where T : SiteBlockData
     {
         protected virtual void SaveModelState(ContentReference blockLink)
         {

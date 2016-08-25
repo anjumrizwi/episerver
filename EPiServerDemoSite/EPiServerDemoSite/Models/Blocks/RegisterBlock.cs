@@ -8,12 +8,6 @@ namespace EPiServerDemoSite.Models.Blocks
     [SiteImageUrl]
     public class RegisterBlock : SiteBlockData
     {
-        public RegisterBlock()
-        {
-
-        }
-
-        [Required]
         [CultureSpecific]
         [Display(Name = "Headine line", GroupName = SystemTabNames.Content, Order = 10)]
         public virtual string HeadingLineText { get; set; }

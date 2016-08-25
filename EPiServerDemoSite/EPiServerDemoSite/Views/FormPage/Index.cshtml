@@ -1,0 +1,17 @@
+﻿@model EPiServerDemoSite.Models.ViewModels.FormPageModel
+
+
+    @using (Html.BeginForm("Save", "FormPage", FormMethod.Post))
+    {
+
+        <div role="main" id="main" class="main row">
+
+            <div class="large-8 column">
+
+                @Html.PropertyFor(x => x.CurrentPage.RelatedContentArea)
+
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    }

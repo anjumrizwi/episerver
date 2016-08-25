@@ -5,27 +5,33 @@
 
 
 <h2>@Html.PropertyFor(m => m.ParentBlock.HeadingLineText)</h2>
-<div id="divmsg">
-    <p>@Html.ValidationSummary()</p>
-    @using (Ajax.BeginForm("Submit", "RegisterBlock", new AjaxOptions { UpdateTargetId = "divmsg" }))
-    {
-        @Html.HiddenFor(m => m.CurrentBlockLink)
-        @Html.HiddenFor(m => m.CurrentPageLink)
-        @Html.HiddenFor(m => m.CurrentLanguage)
-        <div>
-            <p>
-                @Html.PropertyFor(x => x.ParentBlock.UserNameText)
-                <input type="text" name="UserName" value="@Model.UserName">
-            </p>
-            <p>
-                @Html.PropertyFor(x => x.ParentBlock.PasswordText)
-                <input type="password" name="Password" value="@Model.Password">
-            </p>
-            <p>
-                @Html.PropertyFor(x => x.ParentBlock.EmailIdText)
-                <input type="text" name="EmailId" value="@Model.EmailId">
-            </p>
-            <button type="submit">Submit</button>
+
+<div role="main" id="main" class="main row">
+    <div class="large-8 column">
+        <div id="divmsg">
+
+            @using (Ajax.BeginForm("Submit", "RegisterBlock", new AjaxOptions { UpdateTargetId = "divmsg" }))
+            {
+                @Html.HiddenFor(m => m.CurrentBlockLink)
+                @Html.HiddenFor(m => m.CurrentPageLink)
+                @Html.HiddenFor(m => m.CurrentLanguage)
+                <p>@Html.ValidationSummary()</p>
+                <p>@ViewBag.StatusMessage</p>
+
+                <p>
+                    @Html.PropertyFor(x => x.ParentBlock.UserNameText)
+                    <input type="text" name="UserName" value="@Model.UserName">
+                </p>
+                <p>
+                    @Html.PropertyFor(x => x.ParentBlock.PasswordText)
+                    <input type="password" name="Password" value="@Model.Password">
+                </p>
+                <p>
+                    @Html.PropertyFor(x => x.ParentBlock.EmailIdText)
+                    <input type="text" name="EmailId" value="@Model.EmailId">
+                </p>
+                <button type="submit">Submit</button>
+            }
         </div>
-    }
+    </div>
 </div>

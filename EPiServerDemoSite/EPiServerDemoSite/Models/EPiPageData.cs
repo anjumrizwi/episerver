@@ -10,9 +10,7 @@ namespace EPiServerDemoSite.Models
     {
         public virtual XhtmlString MainBody { get; set; }
 
-        [Display(
-            GroupName = SystemTabNames.Content,
-            Order = 200)]
+        [Display(GroupName = SystemTabNames.Content, Order = 200)]
         [CultureSpecific]
         [UIHint(UIHint.Textarea)]
         public virtual string TeaserText
@@ -29,9 +27,7 @@ namespace EPiServerDemoSite.Models
             set { this.SetPropertyValue(p => p.TeaserText, value); }
         }
 
-        [Display(
-            GroupName = Global.GroupNames.MetaData,
-            Order = 300)]
+        [Display(GroupName = Global.GroupNames.MetaData, Order = 300)]
         [CultureSpecific]
         [UIHint(UIHint.LongString)]
         public virtual string MetaDescription { get; set; }
