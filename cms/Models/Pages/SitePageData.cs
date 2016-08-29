@@ -1,9 +1,8 @@
-﻿using System;
 using System.ComponentModel.DataAnnotations;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
-using EPiServer.SpecializedProperties;
+
 using EPiServer.Web;
 using EPiServerSimpleSite.Models.Properties;
 using EPiServerSimpleSite.Business.Rendering;
@@ -13,7 +12,7 @@ namespace EPiServerSimpleSite.Models.Pages
     /// <summary>
     /// Base class for all page types
     /// </summary>
-    public class SitePageData : PageData, ICustomCssInContentArea
+    public abstract class SitePageData : PageData, ICustomCssInContentArea
     {
         [Display(
              GroupName = Global.GroupNames.MetaData,

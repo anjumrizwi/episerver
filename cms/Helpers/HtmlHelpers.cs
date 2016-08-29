@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,7 +57,9 @@ namespace EPiServerSimpleSite.Helpers
 
             if (includeRoot)
             {
-                menuItems.Insert(0, CreateMenuItem(contentLoader.Get<PageData>(rootLink), currentContentLink, pagePath, contentLoader, filter));
+                menuItems.Insert(0,
+                    CreateMenuItem(contentLoader.Get<PageData>(rootLink), currentContentLink, pagePath, contentLoader,
+                        filter));
             }
 
             var buffer = new StringBuilder();
@@ -70,7 +72,9 @@ namespace EPiServerSimpleSite.Helpers
             return new MvcHtmlString(buffer.ToString());
         }
 
-        private static MenuItem CreateMenuItem(PageData page, ContentReference currentContentLink, List<ContentReference> pagePath, IContentLoader contentLoader, Func<IEnumerable<PageData>, IEnumerable<PageData>> filter)
+        private static MenuItem CreateMenuItem(PageData page, ContentReference currentContentLink,
+            List<ContentReference> pagePath, IContentLoader contentLoader,
+            Func<IEnumerable<PageData>, IEnumerable<PageData>> filter)
         {
             var menuItem = new MenuItem(page)
             {
@@ -93,6 +97,7 @@ namespace EPiServerSimpleSite.Helpers
             {
                 Page = page;
             }
+
             public PageData Page { get; set; }
             public bool Selected { get; set; }
             public Lazy<bool> HasChildren { get; set; }
@@ -103,7 +108,8 @@ namespace EPiServerSimpleSite.Helpers
         /// Returns a ConditionalLink object which when disposed will write a closing <![CDATA[ </a> ]]> tag
         /// to the response if the shouldWriteLink argument is true.
         /// </summary>
-        public static ConditionalLink BeginConditionalLink(this HtmlHelper helper, bool shouldWriteLink, IHtmlString url, string title = null, string cssClass = null)
+        public static ConditionalLink BeginConditionalLink(this HtmlHelper helper, bool shouldWriteLink, IHtmlString url,
+            string title = null, string cssClass = null)
         {
             if (shouldWriteLink)
             {
@@ -134,7 +140,8 @@ namespace EPiServerSimpleSite.Helpers
         /// Overload which only executes the delegate for retrieving the URL if the link should be written.
         /// This may be used to prevent null reference exceptions by adding null checkes to the shouldWriteLink condition.
         /// </remarks>
-        public static ConditionalLink BeginConditionalLink(this HtmlHelper helper, bool shouldWriteLink, Func<IHtmlString> urlGetter, string title = null, string cssClass = null)
+        public static ConditionalLink BeginConditionalLink(this HtmlHelper helper, bool shouldWriteLink,
+            Func<IHtmlString> urlGetter, string title = null, string cssClass = null)
         {
             IHtmlString url = MvcHtmlString.Empty;
 
@@ -179,6 +186,42 @@ namespace EPiServerSimpleSite.Helpers
                     _viewContext.Writer.Write("</a>");
                 }
             }
+        }
+
+        public static string ActivePage(this HtmlHelper helper, string controller, string action)
+        {
+            string classValue = "";
+
+            var overrideList = new List<PageCheck>
+            {
+                new PageCheck("Index", "ChangePassword"),
+                new PageCheck("Index", "ManageUserRoles")
+            };
+
+            string currentController =
+                helper.ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString();
+            string currentAction = helper.ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString();
+
+            if (overrideList.Any(x => x.OrginalPage == action && x.MappedPage == currentAction))
+                currentAction = action;
+
+            classValue = currentController.ToLower() == controller.ToLower() && currentAction.ToLower() == action.ToLower()
+                ? "epi-tabView-navigation-item-selected"
+                : "epi-tabView-navigation-item";
+
+            return classValue;
+        }
+    }
+
+    internal class PageCheck
+    {
+        public string OrginalPage { get; set; }
+        public string MappedPage { get; set; }
+
+        public PageCheck(string op, string mp)
+        {
+            OrginalPage = op;
+            MappedPage = mp;
         }
     }
 }

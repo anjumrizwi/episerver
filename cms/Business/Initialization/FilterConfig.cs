@@ -1,11 +1,13 @@
-﻿using EPiServer.Framework;
+using System.Web.Mvc;
+using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
-using System.Web.Mvc;
 
 namespace EPiServerSimpleSite.Business.Initialization
 {
-    [InitializableModule]
+    /// <summary>
+    /// Module for registering filters which will be applied to controller actions.
+    /// </summary>
     [ModuleDependency(typeof(EPiServer.Web.InitializationModule))]
     public class FilterConfig : IInitializableModule
     {
@@ -16,7 +18,10 @@ namespace EPiServerSimpleSite.Business.Initialization
 
         public void Uninitialize(InitializationEngine context)
         {
-            //Add uninitialization logic
+        }
+
+        public void Preload(string[] parameters)
+        {
         }
     }
 }

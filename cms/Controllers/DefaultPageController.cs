@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Web.Mvc;
 using EPiServer;
-using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
-using EPiServer.Web.Mvc;
+
 using EPiServerSimpleSite.Models.Pages;
+
 using EPiServerSimpleSite.Models.ViewModels;
-using System;
 
 namespace EPiServerSimpleSite.Controllers
 {
@@ -20,9 +18,10 @@ namespace EPiServerSimpleSite.Controllers
     /// could be modified to set ControllerContext.RouteData.Values["controller"] to type name of the currentPage
     /// argument. That may however have side effects.
     /// </remarks>
+    [TemplateDescriptor(Inherited = true)]
     public class DefaultPageController : PageControllerBase<SitePageData>
     {
-        public ActionResult Index(SitePageData currentPage)
+        public ViewResult Index(SitePageData currentPage)
         {
             var model = CreateModel(currentPage);
             return View(string.Format("~/Views/{0}/Index.cshtml", currentPage.GetOriginalType().Name), model);

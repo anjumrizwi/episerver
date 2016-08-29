@@ -37,4 +37,22 @@ namespace EPiServerSimpleSite.Business.Initialization
         {
         }
     }
+
+    [ModuleDependency(typeof(EPiServer.Web.InitializationModule))]
+    public class FixQueryableNotificationUsersInitialization : IConfigurableModule
+    {
+        public void ConfigureContainer(ServiceConfigurationContext context)
+        {
+            context.Services.RemoveAll<EPiServer.Notification.IQueryableNotificationUsers>();
+            context.Services.AddTransient<EPiServer.Notification.IQueryableNotificationUsers>((s) => s.GetInstance<EPiServer.Security.SynchronizingUserService>());
+        }
+
+        public void Initialize(InitializationEngine context)
+        {
+        }
+
+        public void Uninitialize(InitializationEngine context)
+        {
+        }
+    }
 }

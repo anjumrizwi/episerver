@@ -1,4 +1,4 @@
-﻿using EPiServer.Core;
+using EPiServer.Core;
 using EPiServerSimpleSite.Models.Pages;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,13 @@ using System.Text;
 
 namespace EPiServerSimpleSite.Models.ViewModels
 {
+    /// <summary>
+    /// Defines common characteristics for view models for pages, including properties used by layout files.
+    /// </summary>
+    /// <remarks>
+    /// Views which should handle several page types (T) can use this interface as model type rather than the
+    /// concrete PageViewModel class, utilizing the that this interface is covariant.
+    /// </remarks>
     public interface IPageViewModel<out T> where T : SitePageData
     {
         T CurrentPage { get; }

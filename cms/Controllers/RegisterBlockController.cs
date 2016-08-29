@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using EPiServer;
+﻿using EPiServer;
 using EPiServer.Core;
+using EPiServer.Globalization;
+using EPiServer.ServiceLocation;
 using EPiServer.Web;
 using EPiServer.Web.Mvc;
+using EPiServer.Web.Routing;
+using EPiServerSimpleSite.Models;
+using EPiServerSimpleSite.Models.Account;
 using EPiServerSimpleSite.Models.Blocks;
 using EPiServerSimpleSite.Models.Entities;
-using EPiServerSimpleSite.Models;
-using EPiServer.ServiceLocation;
-using EPiServer.Web.Routing;
 using EPiServerSimpleSite.Models.Forms;
-using EPiServer.Globalization;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace EPiServerSimpleSite.Controllers
 {
@@ -25,12 +29,32 @@ namespace EPiServerSimpleSite.Controllers
     {
         private readonly IContentLoader _contentLoader;
         private readonly IPermanentLinkMapper _permanentLinkMapper;
+        private ApplicationUserManager _userManager;
+
         private const string SUCCESS_KEY = "formPosted";
 
-        public RegisterBlockController(IContentLoader contentLoader, IPermanentLinkMapper permanentLinkMapper)
+        public RegisterBlockController()
+        {
+            _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        }
+
+        public RegisterBlockController(IContentLoader contentLoader, IPermanentLinkMapper permanentLinkMapper, ApplicationUserManager userManager)
         {
             _contentLoader = contentLoader;
             _permanentLinkMapper = permanentLinkMapper;
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         public override ActionResult Index(RegisterBlock currentBlock)
@@ -56,7 +80,7 @@ namespace EPiServerSimpleSite.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult Submit(RegisterBlockModel formModel, RegisterBlock block, PageData page)
+        public async Task<ActionResult> Submit(RegisterBlockModel formModel, RegisterBlock block, PageData page)
         {
             var returnUrl = UrlResolver.Current.GetUrl(formModel.CurrentPageLink);
 
@@ -67,13 +91,47 @@ namespace EPiServerSimpleSite.Controllers
 
             SaveModelState(formModel.CurrentBlockLink);
 
-            return Redirect(returnUrl);
+            return await Register(formModel);
         }
 
         public ActionResult Success()
         {
             // Return the default view
             return View();
+        }
+
+        private async Task<ActionResult> Register(RegisterBlockModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = model.UserName,
+                    Email = model.EmailId
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    ViewBag.StatusMessage = "User Created!";
+                    //return Redirect("/");
+                }
+
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            //return Json("Hello");
+            return PartialView("Index", model);
+
+            //return Content(ViewBag.StatusMessage);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
     }
 }

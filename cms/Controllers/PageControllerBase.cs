@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
-using EPiServer;
-using EPiServer.Core;
-using EPiServer.Framework.DataAnnotations;
+using System.Web.Security;
+using EPiServerSimpleSite.Business;
 using EPiServer.Web.Mvc;
 using EPiServerSimpleSite.Models.Pages;
-using System.Web.Security;
 using EPiServerSimpleSite.Models.ViewModels;
 
 namespace EPiServerSimpleSite.Controllers
@@ -15,7 +11,8 @@ namespace EPiServerSimpleSite.Controllers
     /// All controllers that renders pages should inherit from this class so that we can 
     /// apply action filters, such as for output caching site wide, should we want to.
     /// </summary>
-    public class PageControllerBase<T> : PageController<T> where T : SitePageData
+    public abstract class PageControllerBase<T> : PageController<T>, IModifyLayout
+        where T : SitePageData
     {
         /// <summary>
         /// Signs out the current user and redirects to the Index action of the same controller.
@@ -35,7 +32,7 @@ namespace EPiServerSimpleSite.Controllers
         public virtual void ModifyLayout(LayoutModel layoutModel)
         {
             var page = PageContext.Page as SitePageData;
-            if (page != null)
+            if(page != null)
             {
                 layoutModel.HideHeader = page.HideSiteHeader;
                 layoutModel.HideFooter = page.HideSiteFooter;
